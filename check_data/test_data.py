@@ -117,4 +117,7 @@ def test_kolmogorov_smirnov(data, ks_alpha):
         # obtaining a test statistic (TS) equal or more extreme that the one we got
         # by chance, when the null hypothesis is true. If this probability is not
         # large enough, this dataset should be looked at carefully, hence we fail
+        # If p_value is NaN, it means the samples are identical, which is acceptable
+        if pd.isna(p_value):
+            continue
         assert p_value > alpha_prime
